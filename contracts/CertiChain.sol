@@ -11,8 +11,7 @@ contract CertificateStore {
         string ipfsHash;
         uint timestamp;
     }
-
-    mapping (address => bool) public authorizedCertifiers;                  // people who can certify a certificate
+    mapping (address => bool) private authorizedCertifiers;                  // people who can certify a certificate
     mapping (address => Certificate[]) private certificatesByStudent;       // list of certificates mapped to a student
 
     modifier onlyOwner() {
@@ -62,9 +61,14 @@ contract CertificateStore {
     }
 
     // Function to get a certificate by its IPFS hash
-    function getCertificateByHash(string memory ipfsHash) public view returns (Certificate memory) {
-        for (uint i = 0; i < certificatesByStudent[msg.sender].length; i++) {
-            Certificate memory certificate = certificatesByStudent[msg.sender][i];
+    /*
+
+        need to update the get certificate by hash function so that it works even without 
+
+    */
+    function getCertificateByHash(string memory ipfsHash , address person) public view returns (Certificate memory) {
+        for (uint i = 0; i < certificatesByStudent[person].length; i++) {
+            Certificate memory certificate = certificatesByStudent[person][i];
             if (keccak256(bytes(certificate.ipfsHash)) == keccak256(bytes(ipfsHash))) {
                 return certificate;
             }

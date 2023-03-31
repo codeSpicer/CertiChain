@@ -16,7 +16,7 @@ async function main() {
   console.log(`Certichain Contract deployed to `, certichain.address);
   fs.writeFileSync(
     "./config.js",
-    `export const certichainAddress = ${certichain.address}`
+    `export const certichainAddress = "${certichain.address}"`
   );
 }
 main()
