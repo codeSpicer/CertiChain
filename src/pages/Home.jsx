@@ -3,8 +3,7 @@ import { certichainAddress } from "../../config";
 import certichain from "../../artifacts/contracts/CertiChain.sol/CertificateStore.json";
 import Web3 from "web3";
 
-const provider = new Web3.providers.HttpProvider("http://127.0.0.1:8545");
-const web3 = new Web3(provider);
+const web3 = new Web3(window.ethereum);
 const Certichain = new web3.eth.Contract(certichain.abi, certichainAddress);
 
 const Home = () => {
@@ -14,9 +13,11 @@ const Home = () => {
   useEffect(() => {
     const fetchCertificates = async () => {
       try {
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        const accounts = await new Web3(window.ethereum).eth.getAccounts();
         const result = await Certichain.methods
           .getCertificatesByStudent()
-          .call();
+          .call({ from: accounts[0] });
         setCertificates(result);
         setLoading(false);
       } catch (error) {

@@ -3,9 +3,9 @@ import { PDFDocument } from "pdf-lib";
 import certichain from "../../artifacts/contracts/CertiChain.sol/CertificateStore.json";
 import { certichainAddress } from "../../config";
 import Web3 from "web3";
+// import fs from "fs";
 
-const provider = new Web3.providers.HttpProvider("http://127.0.0.1:8545");
-const web3 = new Web3(provider);
+const web3 = new Web3(window.ethereum);
 const Certichain = new web3.eth.Contract(certichain.abi, certichainAddress);
 
 function VerifyCertificate() {
@@ -98,18 +98,16 @@ function PdfCreator({
   async function createPdf() {
     console.log(stuname, organization, details, certifier, student, hash);
     const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage([800, 800]);
-    page.drawText(stuname, { x: 50, y: 750 });
-    page.drawText(organization, { x: 50, y: 650 });
-    page.drawText(details, { x: 50, y: 550 });
-    page.drawText(certifier, { x: 50, y: 450 });
-    page.drawText(student, { x: 50, y: 350 });
-    page.drawText(hash, { x: 50, y: 250 });
-    const pngImageBytes = await fetch("src/pages/certificate.png").then((res) =>
-      res.arrayBuffer()
-    );
-    const pngImage = await pdfDoc.embedPng(pngImageBytes);
-    page.drawImage(pngImage, { x: 100, y: 250, width: 300, height: 200 });
+
+    const page = pdfDoc.addPage();
+
+    page.drawText(stuname, { x: 100, y: 500 });
+    page.drawText(organization, { x: 100, y: 400 });
+    page.drawText(details, { x: 245, y: 650 });
+    page.drawText(certifier, { x: 20, y: 230 });
+    page.drawText(student, { x: 20, y: 330 });
+    page.drawText(hash, { x: 420, y: 10 });
+
     const pdfBytes = await pdfDoc.save();
     setPdfData(pdfBytes);
   }
