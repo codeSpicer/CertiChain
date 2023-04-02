@@ -6,6 +6,9 @@ contract CertificateStore {
     event FileCertified(address indexed certifier, address indexed student, string ipfsHash, uint timestamp);
 
     struct Certificate {
+        string name;
+        string organization;
+        string details;
         address certifier;
         address student;
         string ipfsHash;
@@ -31,17 +34,12 @@ contract CertificateStore {
         authorizedCertifiers[certifier] = false;                            // remove certifiers 
     }
 
-    function certifyFile(address student, string memory ipfsHash) public payable {
+    function certifyFile(string memory name , string memory organization ,string memory details , address student, string memory ipfsHash) public payable {
         require(authorizedCertifiers[msg.sender], "Only authorized certifiers can call this function.");
         require(student != address(0), "Invalid student address");
-        Certificate memory newCertificate = Certificate(msg.sender, student, ipfsHash, block.timestamp);
+        Certificate memory newCertificate = Certificate(name , organization, details ,msg.sender, student, ipfsHash, block.timestamp);
         certificatesByStudent[student].push(newCertificate);
         emit FileCertified(msg.sender, student, ipfsHash, block.timestamp);
-    }
-
-    function getCertificatesByStudent(address student) public view returns (Certificate[] memory) {
-        require( msg.sender == student, "Only the student can call this function.");     // access control
-        return certificatesByStudent[student];
     }
 
     function revokeCertificate(address student, string memory ipfsHash) public{
@@ -60,12 +58,14 @@ contract CertificateStore {
         require(found, "Certificate not found.");
     }
 
-    // Function to get a certificate by its IPFS hash
-    /*
 
-        need to update the get certificate by hash function so that it works even without 
+    // for student 
+    function getCertificatesByStudent() public view returns (Certificate[] memory) {
+        // require( msg.sender == student, "Only the student can call this function.");     // access control
+        return certificatesByStudent[msg.sender];
+    }
 
-    */
+    // student or verifier
     function getCertificateByHash(string memory ipfsHash , address person) public view returns (Certificate memory) {
         for (uint i = 0; i < certificatesByStudent[person].length; i++) {
             Certificate memory certificate = certificatesByStudent[person][i];
