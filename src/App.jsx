@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import AddCert from "./pages/addCertificate";
 import Verify from "./pages/verifyCertificate";
 import Home from "./pages/Home";
+import Owner from "./pages/owner";
 import Navbar from "./pages/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/add" element={<AddCert />} />
+          <Route path="/owner" element={<Owner />} />
         </Routes>
       </Router>
     </div>

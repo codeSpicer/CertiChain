@@ -37,7 +37,14 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        // flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       {certificates.map((certificate, index) => (
         <div key={index} className="certificate">
           <p>Name: {certificate.name}</p>

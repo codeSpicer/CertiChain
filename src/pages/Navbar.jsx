@@ -12,6 +12,7 @@ function Navigation() {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/add">Add Certificate</Nav.Link>
             <Nav.Link href="/verify">Verify</Nav.Link>
+            <Nav.Link href="/owner"> Add Certifier</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
