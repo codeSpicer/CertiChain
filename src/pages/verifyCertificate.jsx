@@ -79,7 +79,9 @@ function VerifyCertificate() {
           onChange={(e) => setAddress(e.target.value)}
         />
       </div>
-      <button type="submit">Get Certificate</button>
+      <button style={{ margin: "5px" }} type="submit">
+        Get Certificate
+      </button>
       <PdfCreator {...formState} />
     </form>
   );

@@ -69,7 +69,9 @@ function Owner() {
             onChange={(e) => setCertifier(e.target.value)}
           />
         </label>
-        <button type="submit">Add Authorized Certifier</button>
+        <button style={{ margin: "5px" }} type="submit">
+          Add Authorized Certifier
+        </button>
       </form>
       <form onSubmit={handleRemoveCertifier}>
         <label>
@@ -80,7 +82,9 @@ function Owner() {
             onChange={(e) => setCertifier(e.target.value)}
           />
         </label>
-        <button type="submit">Remove Authorized Certifier</button>
+        <button style={{ margin: "5px" }} type="submit">
+          Remove Authorized Certifier
+        </button>
       </form>
       <p>{message}</p>
     </div>

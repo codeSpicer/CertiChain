@@ -42,22 +42,6 @@ contract CertificateStore {
         emit FileCertified(msg.sender, student, ipfsHash, block.timestamp);
     }
 
-    // function revokeCertificate(address student, string memory ipfsHash) public{
-    //     bool found = false;
-    //     for (uint i = 0; i < certificatesByStudent[student].length; i++) {
-    //         Certificate storage certificate = certificatesByStudent[student][i];
-    //         if (keccak256(bytes(certificate.ipfsHash)) == keccak256(bytes(ipfsHash))) {
-    //             if (msg.sender == certificate.certifier || msg.sender == owner) {
-    //                 certificatesByStudent[student][i] = certificatesByStudent[student][certificatesByStudent[student].length - 1];
-    //                 certificatesByStudent[student].pop();
-    //                 found = true;
-    //                 break;
-    //             }
-    //         }
-    //     }
-    //     require(found, "Certificate not found.");
-    // }
-
 
     // for student 
     function getCertificatesByStudent() public view returns (Certificate[] memory) {
