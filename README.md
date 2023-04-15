@@ -20,7 +20,7 @@ To run this project:
 
 This will deploy the smart contract.
 
-7. In another terminal in the same directory, `run npm run dev`.
+7. In another terminal in the same directory, run` npm run dev`.
 
 The user needs to have Metamask installed in their browser and also needs to import the private keys of the first hardhat address because that is the owner account. They can then add new certifiers and certify certificates to users.
 
