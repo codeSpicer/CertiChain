@@ -12,13 +12,14 @@ To run this project:
 2. Git clone the project
 3. Change into the project directory: `cd project-name`
 4. Run `npm install`
-5. In another terminal, start the `hardhat node` in the local system by running `npx hardhat node`
+5. In another terminal, start the hardhat node in the local system by running `npx hardhat node`
 6. In the same directory, run the following:
    ```shell
-   npx hardhat run scripts/deploy.js
+   npx hardhat compile
+   npx hardhat run scripts/deploy.js --network localhost
    ```
 
-This will deploy the smart contract.
+This will compile and deploy the smart contract to local blockchain.
 
 7. In another terminal in the same directory, run` npm run dev`.
 
